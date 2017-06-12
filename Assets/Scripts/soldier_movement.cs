@@ -29,6 +29,7 @@ public class soldier_movement : MonoBehaviour {
         // movements
         float fx = 0f;
 
+        // check if the sprite is on the ground
         Vector2 feet_pos = self.position + feet.offset;
         feet_pos.y -= feet.radius;
         grounded = Physics2D.OverlapCircle(feet_pos, GroundCheckRadius, GroundMask);
