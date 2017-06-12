@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Soldier_shooting : MonoBehaviour {
+public class soldier_shooting : MonoBehaviour {
+    public Camera PlayerCamera;
     public GameObject ProjectilePrefab;
     public float FirePower = 10.0f;
 
@@ -18,11 +19,17 @@ public class Soldier_shooting : MonoBehaviour {
 	void Update () {
         if (Input.GetButtonDown("Fire1"))
         {
-            GameObject proj = Instantiate<GameObject>(ProjectilePrefab, transform.position, Quaternion.identity);
+            Vector2 objPos = transform.position; 
+            Vector2 mousePos = Input.mousePosition; 
+            mousePos = PlayerCamera.ScreenToWorldPoint(mousePos);
+            Vector2 direction = mousePos - objPos;
+
+            Quaternion rotation = Quaternion.FromToRotation(Vector3.right, direction);
+            GameObject proj = Instantiate<GameObject>(ProjectilePrefab, transform.position, rotation);
             Rigidbody2D rb = proj.GetComponent<Rigidbody2D>();
             rb.velocity = self.velocity;
 
-            Vector2 force = new Vector2(FirePower, 0f);
+            Vector2 force = direction.normalized * FirePower;
             rb.AddForce(force, ForceMode2D.Impulse);
             projectiles.Add(proj);
         }
