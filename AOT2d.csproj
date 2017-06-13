@@ -80,10 +80,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\soldier_shooting.cs" />
+    <Compile Include="Assets\Animations\Soldier\odm_anim_behaviour.cs" />
     <Compile Include="Assets\Scripts\projectile_flying.cs" />
     <Compile Include="Assets\Scripts\simple_movement.cs" />
     <Compile Include="Assets\Scripts\soldier_movement.cs" />
+    <Compile Include="Assets\Scripts\soldier_shooting_old.cs" />
+    <Compile Include="Assets\Scripts\ODM.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
