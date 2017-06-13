@@ -36,10 +36,10 @@ public class simple_movement : MonoBehaviour {
             fy = Math.Sign(Input.GetAxis("Vertical")) * JumpForce;
         Vector2 force = new Vector2(fx, fy);
 
-        Debug.Log(string.Format("fx = {0}, fy = {1}", fx, fy));
-        Debug.Log(string.Format("vx = {0}, vy = {1}", rb.velocity.x, rb.velocity.y));
-        Debug.Log(string.Format("x = {0}, y = {1}", feet_pos.x, feet_pos.y));
-        Debug.Log(string.Format("grounded = {0}", grounded));
+        //Debug.Log(string.Format("fx = {0}, fy = {1}", fx, fy));
+        //Debug.Log(string.Format("vx = {0}, vy = {1}", rb.velocity.x, rb.velocity.y));
+        //Debug.Log(string.Format("x = {0}, y = {1}", feet_pos.x, feet_pos.y));
+        //Debug.Log(string.Format("grounded = {0}", grounded));
         rb.AddForce(force, ForceMode2D.Impulse);
 	}
 }

@@ -11,7 +11,7 @@ public class soldier_movement : MonoBehaviour {
     public Vector2 MaxSpeed = new Vector2(5.0f, 5.0f);
     public LayerMask GroundMask;
 
-    Rigidbody2D self;
+    Rigidbody2D rb;
     CircleCollider2D feet;
     Animator anim;
     bool grounded = false;
@@ -19,7 +19,7 @@ public class soldier_movement : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        self = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
         feet = GetComponent<CircleCollider2D>();
         anim = GetComponent<Animator>();
     }
@@ -30,17 +30,17 @@ public class soldier_movement : MonoBehaviour {
         float fx = 0f;
 
         // check if the sprite is on the ground
-        Vector2 feet_pos = self.position + feet.offset;
+        Vector2 feet_pos = rb.position + feet.offset;
         feet_pos.y -= feet.radius;
         grounded = Physics2D.OverlapCircle(feet_pos, GroundCheckRadius, GroundMask);
 
-        if (Math.Abs(self.velocity.x) < MaxSpeed.x)
+        if (Math.Abs(rb.velocity.x) < MaxSpeed.x)
             fx = Math.Sign(Input.GetAxis("Horizontal")) * MoveForce;
         Vector2 force = new Vector2(fx, 0f);
-        self.AddForce(force, ForceMode2D.Impulse);
+        rb.AddForce(force, ForceMode2D.Impulse);
 
-        anim.SetFloat("SpeedX", Math.Abs(self.velocity.x));
-        anim.SetFloat("SpeedY", self.velocity.y);
+        anim.SetFloat("SpeedX", Math.Abs(rb.velocity.x));
+        anim.SetFloat("SpeedY", rb.velocity.y);
         anim.SetBool("Grounded", grounded);
 
         // facing
@@ -50,9 +50,9 @@ public class soldier_movement : MonoBehaviour {
             Flip();
 
         // debug
-        Debug.Log(string.Format("vx = {0}, vy = {1}", self.velocity.x, self.velocity.y));
-        Debug.Log(string.Format("x = {0}, y = {1}", feet_pos.x, feet_pos.y));
-        Debug.Log(string.Format("grounded = {0}", grounded));
+        //Debug.Log(string.Format("vx = {0}, vy = {1}", self.velocity.x, self.velocity.y));
+        //Debug.Log(string.Format("x = {0}, y = {1}", feet_pos.x, feet_pos.y));
+        //Debug.Log(string.Format("grounded = {0}", grounded));
 	}
 
     // Update is called once per frame
@@ -60,10 +60,10 @@ public class soldier_movement : MonoBehaviour {
     {
         bool jump = Input.GetButtonDown("Jump");
 
-        if (jump && grounded && Math.Abs(self.velocity.y) < MaxSpeed.y)
+        if (jump && grounded && Math.Abs(rb.velocity.y) < MaxSpeed.y)
         {
             Vector2 force = new Vector2(0f, JumpForce);
-            self.AddForce(force, ForceMode2D.Impulse);
+            rb.AddForce(force, ForceMode2D.Impulse);
         }
 
     }

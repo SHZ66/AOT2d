@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class projectile_flying : MonoBehaviour {
 
+    public bool Attached = false;
+    public GameObject Shooter;
+
     Rigidbody2D self;
 
     // Use this for initialization
     void Start () {
         self = GetComponent<Rigidbody2D>();
-	}
+        Attached = false;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -23,15 +27,16 @@ public class projectile_flying : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer != LayerMask.NameToLayer("Player"))
-            if (collision.gameObject.layer != LayerMask.NameToLayer("Projectile"))
-                self.simulated = false;
+        //Debug.Log(collision.gameObject.ToString());
+        Attached = true;
+        self.simulated = false;
+
+        if (Shooter != null)
+        {
+            ODM script = Shooter.GetComponent<ODM>();
+            if (script != null)
+                script.OnAttached(gameObject);
+        }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.layer != LayerMask.NameToLayer("Player"))
-            if (collision.gameObject.layer != LayerMask.NameToLayer("Projectile"))
-                self.simulated = false;
-    }
 }
