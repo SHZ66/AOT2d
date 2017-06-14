@@ -66,6 +66,12 @@ public class soldier_movement : MonoBehaviour {
             rb.AddForce(force, ForceMode2D.Impulse);
         }
 
+        if (Input.GetButtonDown("Cancel"))
+        {
+            Debug.Log("Quit");
+            Application.Quit();
+        }
+            
     }
 
         void Flip()
