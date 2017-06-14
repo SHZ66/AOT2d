@@ -64,8 +64,7 @@ public class soldier_shooting_old : MonoBehaviour {
             Vector2 mousePos = Input.mousePosition; 
             mousePos = PlayerCamera.ScreenToWorldPoint(mousePos);
             Vector2 direction = mousePos - objPos;
-
-            Quaternion rotation = Quaternion.FromToRotation(Vector3.right, direction);
+            
             GameObject proj = createProjectile(transform.position, direction);
             if (anchors.Count == 2)
             {

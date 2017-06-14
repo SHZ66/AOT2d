@@ -146,8 +146,6 @@ public class ODM : MonoBehaviour {
         anim.SetBool("ODMing", odming);
         
         // draw rope
-        float total_rope_length = sq_rope_lengths[0] + sq_rope_lengths[1];
-
         float[] p = new float[NUM_ANCHORS];
 
         for (int i = 0; i < NUM_ANCHORS; i++)
